@@ -1,40 +1,45 @@
-// code meant for TinkerCad to test the LED and button
-// define the first LED pin to be pin 8
-int LED1_PIN = 8;
-// define the button LED pin to be pin 4
-int BUTTON_LED_PIN = 4;
-// button connects to led 2
-int BUTTON_PIN = 2;
-// variable to store the state of the button
-int isClicked = 0;
-// setup the pins to the appropriate mode
+// program is meant to be executed in tinkercad
+//  defining the pins for the button and the LEDs
+int button_led = 2;
+// the LED that will blink every 2 seconds
+int periodic_led = 8;
+// the button pin
+int button = 4;
+// the variable that will hold the state of the button
+int is_clicked = 0;
+// the variable that will hold the previous time the LED blinked
+int prev_millis = 0;
+// the delay in milliseconds
+int delay_in_ms = 2000;
+// setup func
 void setup() {
-    // set the LED pin to be an output
-    pinMode(LED1_PIN, OUTPUT);
-    // set the button LED pin to be an output
-    pinMode(BUTTON_LED_PIN, OUTPUT);
-    // set the button pin to be an input
-    pinMode(BUTTON_PIN, INPUT);
+    // set the button LED as an output
+    pinMode(button_led, OUTPUT);
+    // set the periodic LED as an output
+    pinMode(periodic_led, OUTPUT);
+    // set the button as an input
+    pinMode(button, INPUT);
 }
-// loop function
+// loop func
 void loop() {
+    // get the current milliseconds that have passed since the program started, i use millis instead of delay to not block the program
+    int curr_millis = millis();
+    // if the time that has passed since the last blink is greater than the delay
+    if (curr_millis - prev_millis >= delay_in_ms) {
+        // switch the led to its opposite state
+        digitalWrite(periodic_led, !digitalRead(periodic_led));
+        // set the previous time to the current time so that the calculation can be done again
+        prev_millis = curr_millis;
+    }
     // read the state of the button
-    isClicked = digitalRead(BUTTON_PIN);
+    is_clicked = digitalRead(button);
     // if clicked
-    if (isClicked == HIGH) {
+    if (is_clicked == HIGH) {
         // turn on the button LED
-        digitalWrite(BUTTON_LED_PIN, HIGH);
+        digitalWrite(button_led, HIGH);
         // otherwise it isnt clicked
     } else {
         // turn off the button LED
-        digitalWrite(BUTTON_LED_PIN, LOW);
+        digitalWrite(button_led, LOW);
     }
-    // turn on the LED
-    digitalWrite(8, HIGH);
-    // Wait for 1000 millisecond(s)
-    delay(1000);
-    // turn off the LED
-    digitalWrite(8, LOW);
-    // Wait for 1000 millisecond(s)
-    delay(1000);
 }
