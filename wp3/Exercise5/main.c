@@ -15,7 +15,8 @@ int main(int argc, char* argv[]) {
     printf("The size of an integer (number of bytes) is: %d\n", sizeof(*array));
     printf("The size of the whole array in bytes is: %d\n", sizeof(*array) * MAX);
     for (int i = 0; i < MAX; i++) {
-        printf("Integer: %d,  2 * Integer: %d\n", array[i], array[i] * 2);
+        printf("Integer: %d,  2 * Integer: %d\n", *array, *array * 2);
+        array++;
     }
     free(array);
 }
