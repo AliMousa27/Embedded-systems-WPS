@@ -1,5 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-
+#define red_led 3
 #define PIN 2	 // input pin Neopixel is attached to
 #define temp A0
 #define NUMPIXELS      24 // number of neopixels in strip
@@ -13,6 +13,7 @@ void setup()
 {
   Serial.begin(9600);
   pinMode(temp,INPUT);
+  pinMode(red_led,OUTPUT);
   last_temp=read_temp();
   ring.begin();
   //to control timer we have 2 main registers TCCR1A and B
@@ -49,6 +50,13 @@ ISR(TIMER1_COMPA_vect){
   Serial.println(i);
   ring.show(); 
   last_temp=temperature; 
+  
+  if(i>=NUMPIXELS){
+  	digitalWrite(red_led,HIGH);
+  }
+  else{
+  digitalWrite(red_led,LOW);
+  }
 
 }
 
