@@ -1,9 +1,4 @@
-// // (C) Anton Golubenko, Aditya Khadkikar, Akuien Deng - Group: 27 
-// // Work package 6 
-// // Exercise 1
-// // Submission code: E9K8FPL (provided by your TA-s) 
 
-// // C++ code
 
 //Defining the pins
 #define ENCODER_A 2
